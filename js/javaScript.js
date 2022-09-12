@@ -370,6 +370,21 @@ const sa2 = (mensaje, fondo) => {
     })
 }
 
+const sa3 = (mensaje, fondo) => {
+    Swal.fire({
+        text: mensaje,
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2600,
+        background: fondo,
+        color: '#F1C40F',
+        timerProgressBar: true,
+        imageUrl: "./multimedia/icono.ico",
+        imageWidth: '10em',
+        imageHeight: '10em',
+    })
+}
+
 const button222 = document.querySelector(".button222")
 button222.addEventListener("click", obtenerValorDolar)
 
@@ -389,4 +404,29 @@ async function obtenerValorDolar() {
             sa2("VALOR DOLAR ACTUALIZADO", '#2E4053');
         })
         .catch(error => console.log(error))
+}
+
+
+const borrarCarrito = document.querySelector(".borrarCarrito")
+borrarCarrito.addEventListener("click", borrarCarro)
+
+function borrarCarro(){
+    carritoDiv.innerHTML = `<div>0</div>`
+    carrito.length=0
+    localStorage.removeItem("carrito", JSON.stringify(carrito));
+    const precioTotal = document.querySelector(".precioTotal");
+    totalCarrito.innerText = carrito.reduce((acumulador, prod) => acumulador + prod.cantidad * prod.importe, 0);
+    sa("CARRITO VACIO", '#2E4053');
+}
+
+const comprarCarrito = document.querySelector(".comprarCarrito")
+comprarCarrito.addEventListener("click", comprarCarro)
+
+function comprarCarro(){
+    carritoDiv.innerHTML = `<div>0</div>`
+    carrito.length=0
+    localStorage.removeItem("carrito", JSON.stringify(carrito));
+    const precioTotal = document.querySelector(".precioTotal");
+    totalCarrito.innerText = carrito.reduce((acumulador, prod) => acumulador + prod.cantidad * prod.importe, 0);
+    sa3("RETIRE EL PEDIDO EN LA BARRA", '#2E4053');
 }
